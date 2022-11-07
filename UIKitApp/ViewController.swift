@@ -13,6 +13,10 @@ class ViewController: UIViewController {
     @IBOutlet var segmentedControl: UISegmentedControl!
     @IBOutlet var slider: UISlider!
     @IBOutlet var userNameTextField: UITextField!
+    @IBOutlet var datePicker: UIDatePicker!
+    @IBOutlet var hideSwitch: UISwitch!
+    @IBOutlet var hideLabel: UILabel!
+    @IBOutlet var stackView: UIStackView!
     
     
     override func viewDidLoad() {
@@ -38,6 +42,13 @@ class ViewController: UIViewController {
         
         // чтобы не вставало значние 0,5 из Storyboard
         mainLabel.text = String(slider.value)
+        
+        // DatePicker
+        //datePicker.locale = Locale.current
+        datePicker.locale = Locale(identifier: "ru_RU")
+        
+        // Switch
+        hideSwitch.onTintColor = .red
         
     }
 
@@ -78,6 +89,20 @@ class ViewController: UIViewController {
         mainLabel.text = inputText
         userNameTextField.text = ""
     }
+    
+    @IBAction func chooseDate() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .long
+        dateFormatter.locale = Locale(identifier: "ru_RU")
+        mainLabel.text = dateFormatter.string(from: datePicker.date)
+    }
+    
+    @IBAction func switchAction() {
+        stackView.isHidden.toggle()
+        hideLabel.text = hideSwitch.isOn ? "Show all elements" : "Hide all elements"
+        
+    }
+    
     
 }
 
